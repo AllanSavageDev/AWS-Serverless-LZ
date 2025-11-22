@@ -2,7 +2,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 ## Live Demo  
-Visit: https://aws-serverless.net
+Visit: https://www.aws-serverless.net
 
 ## What is this?  
 This repository contains a **live, fully-deployed AWS serverless environment**, built with Terraform and running real APIs, a static front-end, multiple domains, and global content delivery via CloudFront.  
@@ -30,6 +30,13 @@ Beyond getting it to run and establishing a working baseline for a Terraform-dri
 - **Global Delivery**: S3-hosted static front-end routed through CloudFront, custom domains, HTTPS, cache invalidation.  
 - **Multi-Domain Configuration**: Two domains (`aws-serverless.net` and `lingua1.com`) wired into the same architecture.  
 - **CI/CD Ready**: GitHub Actions with OIDC based role assumption, Terraform CLI, packaging Lambdas, infrastructure deployment automation.
+
+
+> *I could have built this in a default VPC and been done much faster — but that wouldn’t have taught me anything.
+Instead, I built a production-style environment to see what actually happens when you run Lambda inside real network boundaries, talk to managed resources, and deal with the same constraints real teams face in day-to-day AWS work.
+The goal was to surface the friction points and understand how the “purely serverless” promise behaves in a realistic setup.*
+
+
 
 ## Architecture Overview  
 ![](docs/architecture-diagram.svg)  
