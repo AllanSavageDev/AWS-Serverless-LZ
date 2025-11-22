@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" type="image/png" href="../../img/terraform-icon.png">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>API-RDS Demo Test</title>
+    <link rel="stylesheet" href="../css/style.css" />
+</head>
+
+<script src="../js/log.js"></script>
+
+<body>
+    <h2 style="margin-bottom: 8px;">API-RDS Demo</h2>
+    <br>
+    <br>
+    <div class="tabs">
+        <input type="radio" id="tab1" name="tab-control" checked>
+        <label for="tab1">About</label>
+        <input type="radio" id="tab2" name="tab-control">
+        <label for="tab2">Run Test</label>
+        <input type="radio" id="tab3" name="tab-control">
+        <label for="tab3">Terraform File</label>
+        <input type="radio" id="tab4" name="tab-control">
+        <label for="tab4">Python File</label>
+        <input type="radio" id="tab5" name="tab-control">
+        <label for="tab5" onclick="history.back()">Home</label>
+
+        <div id="content1" class="tab-content">
+            <br>
+            <div
+                style="font-family: monospace; font-size: 14px; line-height: 1.4em; margin-bottom: 16px; padding:0px 10px 0px 10px">
+                <h3>Demonstrates a secure Lambda → RDS connection inside a private subnet.</h3>
+            </div>
+            <div
+                style="font-family: monospace; font-size: 14px; line-height: 1.4em; margin-bottom: 16px; padding:0px 10px 0px 10px">
+                Browser → API Gateway → Lambda (VPC) → RDS PostgreSQL
+            </div>
+            <hr style="margin:8px 0;">
+
+            <div
+                style="font-family: monospace; font-size: 14px; line-height: 1.4em; margin-bottom: 16px; padding:0px 10px 0px 10px">
+                <br>
+                <b>A simple CRUD REST API with running test, Terraform and Python file</b>
+                <br>
+
+                <p>
+                    - The 'Run Test' tab will execute the API on AWS and return live output.<br>
+                    - The 'Terraform' tab shows the main.tf which declaring this API<br>
+                    - The 'Python' tab shows the lambda_hanlder.py and demonstrates how this is built<br>
+                </p>
+            </div>
+            <br>
+            <section class="api-info">
+                <h3>API Reference</h3>
+                <p><strong>Endpoint Base URL:</strong> https://api.aws-serverless.net/api-rds</p>
+                <p><strong>Purpose:</strong> Demonstrates full CRUD (Create, Read, Update, Delete) operations against a
+                    PostgreSQL table through AWS Lambda, API Gateway, and RDS.</p>
+
+                <ul>
+                    <li><strong>POST</strong> – <code>/api-rds</code><br />
+                        Creates a new contact record.<br />
+                        <em>Request Body:</em>
+                        <pre>
+{
+  "name": "Jane Doe"
+  "email": "jane@example.com",
+  "phone": "555-1234"
+}</pre>
+                        <em>Returns:</em> JSON object containing the newly created record ID.
+                    </li>
+
+                    <li><strong>GET</strong> – <code>/api-rds</code><br />
+                        Returns all contact records.
+                    </li>
+
+                    <li><strong>PUT</strong> – <code>/api-rds/{id}</code><br />
+                        Updates an existing contact record by ID.<br />
+                        <em>Returns:</em> JSON confirmation of updated record.
+                    </li>
+
+                    <li><strong>DELETE</strong> – <code>/api-rds/{id}</code><br />
+                        Deletes a record by ID.<br />
+                        <em>Returns:</em> JSON message confirming deletion.
+                    </li>
+                </ul>
+            </section>
+        </div>
+
+        <div id="content2" class="tab-content">
+            <br>
+
+            <div
+                style="font-family: monospace; font-size: 14px; line-height: 1.4em; margin-bottom: 16px; padding:0px 10px 0px 10px">
+                <h3>Test /api-rds Live</h3>
+            </div>
+
+            <div
+                style="font-family: monospace; font-size: 14px; line-height: 1.4em; margin-bottom: 16px; padding:0px 10px 0px 10px">
+                Browser → API Gateway → Lambda (VPC) → RDS PostgreSQL
+            </div>
+
+            <hr style="margin:8px 0;">
+
+            <div
+                style="font-family: monospace; font-size: 14px; line-height: 1.4em; margin-bottom: 16px; padding:0px 10px 0px 10px">
+                <br>
+                <b>What This Demonstrates</b>
+                <br>
+                <p>
+                    - Secure Lambda-to-RDS connection inside a private subnet<br>
+                    - Credentials managed via AWS Secrets Manager<br>
+                    - Exposed only through API Gateway (no public DB access)<br>
+                    - Deployed and maintained via Terraform
+                </p>
+            </div>
+
+            <br>
+            <button id="runTest">Run Full Test</button>
+            <br><br>
+
+            <div id="log">Test output shown here ...</div>
+        </div>
+
+
+        <div id="content3" class="tab-content">
+            <br>
+            <div
+                style="font-family: monospace; font-size: 14px; line-height: 1.4em; margin-bottom: 16px; padding:0px 10px 0px 10px">
+                <h3>Terraform Module declares only things specific to this API.</h3>
+            </div>
+
+            <hr style="margin:8px 0;">
+
+            <div
+                style="font-family: monospace; font-size: 14px; line-height: 1.4em; margin-bottom: 16px; padding:0px 10px 0px 10px">
+                <p>
+                    The Module structure allows seperation of independent functionality.
+                </p>
+                <p>
+                    In this case we're using a Module to encapsulate the functionality of all resources sepcific to
+                    invoking a Lambda functon via an API Gateway.
+                </p>
+            </div>
+
+            <br>
+
+            <div class="code-block">
+                <script src="https://gist.github.com/AllanSavageDev/7f0c0e21eff49fdbcc1b7fd88b81121d.js"></script>
+            </div>
+            <style>
+                .code-block {
+                    margin-top: 1em;
+                    overflow-x: auto;
+                }
+            </style>
+        </div>
+
+
+        <div id="content4" class="tab-content">
+            <br>
+            <div
+                style="font-family: monospace; font-size: 14px; line-height: 1.4em; margin-bottom: 16px; padding:0px 10px 0px 10px">
+                <h3>Python based Lambda handler.</h3>
+            </div>
+
+            <hr style="margin:8px 0;">
+
+            <div
+                style="font-family: monospace; font-size: 14px; line-height: 1.4em; margin-bottom: 16px; padding:0px 10px 0px 10px">
+                <p>
+                    Every lambda is backed by a lambda_handler.py that is the entry point of the function.
+                </p>
+                <p>
+                    In this example we're using a standard design pattern to execute CRUD operations on a Postgres RDS
+                    database.
+                </p>
+            </div>
+
+            <br>
+
+            <div class="code-block">
+                <script src="https://gist.github.com/AllanSavageDev/da1abcc68a663088c0683b7d097bafcc.js"></script>
+            </div>
+            <style>
+                .code-block {
+                    margin-top: 1em;
+                    overflow-x: auto;
+                }
+            </style>
+        </div>
+
+
+
+    </div>
+    </div>
+
+    <br>
+
+    <footer style="text-align:center; margin-top:40px; color:#333; font-family:monospace;">
+        <img src="../img/AllanLinkedIn.jpeg" alt="Allan Savage"
+            style="width:120px; height:120px; border-radius:50%; border:2px solid #333; margin-bottom:10px;">
+        <br><br>
+        <div><strong style="color:#333;size:20px;">Allan Savage</strong></div>
+        <br>
+        <a href="https://www.linkedin.com/in/allan-savage-aws-dev" target="_blank" style="color:#333;">
+            https://www.linkedin.com/in/allan-savage-aws-dev
+        </a>
+    </footer>
+
+    <br>
+
+    <!-- Footer Summary -->
+    <p style="font-size: 12px; color:#777; margin-top:20px; text-align:center;">
+        Built, Maintained & Deployed by Allan Savage • Terraform • Secure Serverless Architecture
+    </p>
+
+    <br><br>
+
+    <script>
+        const base = "https://api.aws-serverless.net/api-rds";
+        const logDiv = document.getElementById("log");
+
+        function log(msg, data) {
+            logDiv.textContent += `\n${msg}`;
+            if (data) logDiv.textContent += `\n${JSON.stringify(data, null, 2)}\n`;
+        }
+
+        async function runTest() {
+            logDiv.textContent = "=== Starting API-RDS Test ===\n";
+
+            try {
+                // Create
+                const createRes = await fetch(base, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ name: "Johnn Doedd", email: "johnnn@example.com", phone: "444-1234" })
+                });
+                const createData = await createRes.json();
+                const id = createData.id;
+                log(`🔴 Created record ID ${id}`, createData);
+
+                //View all
+                const view1 = await fetch(base);
+                log("🔴 Records after create:", await view1.json());
+
+                //Update
+                const updateRes = await fetch(`${base}/${id}`, {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ name: "UPDATED Johnny Doe", email: "johnny@example.com", phone: "555-9876" })
+                });
+                log("🔴 Update result:", await updateRes.json());
+
+                //View all again
+                const view2 = await fetch(base);
+                log("🔴 Records after update:", await view2.json());
+
+                // Delete
+                const delRes = await fetch(`${base}/${id}`, { method: "DELETE" });
+                log("🔴 Delete result:", await delRes.json());
+
+                // Final view
+                const view3 = await fetch(base);
+                log("🔴 Final records:", await view3.json());
+
+                log("\n=== ✅ Test Complete ===");
+            } catch (err) {
+                log("❌ Error: " + err.message);
+            }
+        }
+
+        document.getElementById("runTest").addEventListener("click", runTest);
+    </script>
+
+</body>
+
+</html>

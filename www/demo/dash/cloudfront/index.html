@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" type="image/png" href="../img/terraform-icon.png">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Terraform Deployment</title>
+    <link rel="stylesheet" href="../css/style.css" />
+</head>
+
+<script src="../js/log.js"></script>
+
+<body>
+
+    <h2 style="margin-bottom: 8px;">CloudFront Worldwide Content Delivery</h2>
+    <br>
+    <br>
+    <div class="tabs">
+        <input type="radio" id="tab1" name="tab-control" checked>
+        <label for="tab1">About</label>
+
+        <input type="radio" id="tab4" name="tab-control">
+        <label for="tab4" onclick="history.back()">Home</label>
+
+        <div id="content1" class="tab-content">
+            <br>
+
+            <div
+                style="font-family: monospace; font-size: 14px; line-height: 1.4em; margin-bottom: 16px; padding:0px 10px 0px 10px">
+                <h3>Cloudfront For Global Static Content</h3>
+            </div>
+
+            <hr style="margin:8px 0;">
+
+            <div
+                style="font-family: monospace; font-size: 14px; line-height: 1.4em; margin-bottom: 16px; padding:0px 10px 0px 10px">
+                <br>
+                <b>Everyone Has Static Content</b>
+                <br>
+
+                <p>
+                    CloudFront makes it easy to deploy your web content gloabally from a single CloudFront Distribution
+                    and
+                    all but removes management entirely.
+                    Instead of maintaining Nginx and LetsEncrypt certs, a simple S3 bucket hosts your /www securely
+                    behind
+                    your configured DNS name.
+                </p>
+
+                <p>
+                    Simply update the S3 bucket that backs your distribution, invalidate the cache and you're deployed
+                    globaly from a single action.
+                </p>
+
+                <p>
+                    Of course there are some complications in linking CloudFront to S3 securely.
+                    OAC, REST vs HTTP distro types and of course the needed Lambda Edge function to properly load index
+                    files.
+                    Once those configuration hurdles are clear, its by and large a done deal about a giant value add.
+                </p>
+            </div>
+
+
+            <div
+                style="font-family: monospace; font-size: 14px; line-height: 1.4em; margin-bottom: 16px; padding:0px 10px 0px 10px">
+                <br>
+                <b>CloudFront as the Edge Layer</b>
+                <br>
+
+                <p>
+                    CloudFront isn't just a CDN — it's the edge of your architecture. It terminates HTTPS, handles
+                    caching,
+                    absorbs traffic spikes, and provides the performance surface that makes your site feel fast anywhere
+                    in
+                    the world.
+                    By fronting your static assets with CloudFront, you remove an entire layer of operational overhead
+                    and
+                    gain a globally distributed delivery mechanism with effectively no moving parts to maintain.
+
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+    <br>
+
+    <footer style="text-align:center; margin-top:40px; color:#333; font-family:monospace;">
+        <img src="../img/AllanLinkedIn.jpeg" alt="Allan Savage"
+            style="width:120px; height:120px; border-radius:50%; border:2px solid #333; margin-bottom:10px;">
+        <br><br>
+        <div><strong style="color:#333;size:20px;">Allan Savage</strong></div>
+        <br>
+        <a href="https://www.linkedin.com/in/allan-savage-aws-dev" target="_blank" style="color:#333;">
+            https://www.linkedin.com/in/allan-savage-aws-dev
+        </a>
+    </footer>
+
+    <br>
+
+    <p style="font-size: 12px; color:#777; margin-top:20px; text-align:center;">
+        Built, Maintained & Deployed by Allan Savage • Terraform • Secure Serverless Architecture
+    </p>
+
+    <br><br>
+
+</body>
+
+</html>

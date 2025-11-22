@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" type="image/png" href="img/terraform-icon.png">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AWS Demo Dashboard</title>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<script src="js/log.js"></script>
+
+<body>
+
+    <h1>Serverless from Scratch — The Full Stack, Running Live</h1>
+
+    <p class="subtitle">Lambda APIs, CloudFront, VPC design, and Terraform modules in a production-style build</p>
+
+    <h3 style="text-align:center; margin-bottom:16px;">AWS Resources Present</h3>
+    <div style="text-align:center; margin-bottom:16px;">
+        <p style="font-size:16px; color:#555; margin-top:6px; line-height:30px;">Route53 • Custom VPC • Public/Private
+            Subnets • VPC Endpoints • NAT Gateway • API Gateway • Lambda • S3 • RDS PostgreSQL • DynamoDB • SNS • SQS •
+            CloudWatch • CloudFront</p>
+    </div>
+
+    <br>
+
+    <div class="cards">
+
+        <div class="card">
+            <div class="status blue">INFO</div>
+            <h3>TERRAFORM / AWS</h3>
+            <img src="img/terraform-icon.png" alt="Amazon SQS" style="min-width:32px;" class="icon">
+
+            <p>Landing Zone Breakdown: what services are here and how is this layed out?</p>
+
+            <button class="glow-button" onclick="location.href='terraform/'">VIEW CONFIG</button>
+        </div>
+
+
+        <div class="card">
+
+            <div class="status blue">INFO</div>
+            <h3>GitHub Project</h3>
+            <svg class="github-logo" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 0C3.58 0 0 3.58 0 8a8.01 8.01 0 005.47 7.59c.4.07.55-.17.55-.38 
+          0-.19-.01-.82-.01-1.49-2 0-2.48-.49-2.64-.94-.09-.23-.48-.94-.82-1.13
+          -.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 
+          2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 
+          0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 
+          2.2.82a7.56 7.56 0 012-.27c.68 0 1.36.09 2 .27 
+          1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 
+          1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 
+          0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z" />
+            </svg>
+
+            <p>Fork this repo and build your own Terraform AWS depoyment</p>
+            <button onclick="window.open('https://github.com/AllanSavageDev/', '_blank')">View on GitHub</button>
+        </div>
+
+        <div class="card">
+            <div class="status blue">INFO</div>
+            <h3>CloudFront</h3>
+            <img src="img/aws-cloudfront.png" alt="Amazon SNS" style="min-width:32px;" class="icon">
+            <p>Global CDN For Static Content</p>
+            <button onclick="location.href='cloudfront/'">Try It</button>
+        </div>
+
+        <div class="card">
+            <div class="status">LIVE DEMO</div>
+            <h3>/API-<span class="underline">RDS</span></h3>
+            <img src="img/aws-aurora.png" alt="Amazon Aurora" style="min-width:32px;" class="icon">
+            <p>Postgres on a private subnet, public access via Bastion Server</p>
+            <button onclick="location.href='rds/'">Try It</button>
+        </div>
+
+        <div class="card">
+            <div class="status">LIVE DEMO</div>
+            <h3>/API-<span class="underline">TODO</span></h3>
+            <img src="img/aws-dynamodb.png" alt="Amazon DynamoDB" style="min-width:32px;" class="icon">
+            <p>Live Lambda API working with DynamoDB</p>
+            <button onclick="location.href='todo/'">Try It</button>
+        </div>
+
+        <div class="card">
+            <div class="status">LIVE DEMO</div>
+            <h3>/API-<span class="underline">QUEUE</span></h3>
+            <img src="img/aws-sqs.png" alt="Amazon SQS" style="min-width:32px;" class="icon">
+            <p>Live Lambda API working with SQS</p>
+            <button onclick="location.href='queue/'">Try It</button>
+        </div>
+
+        <div class="card">
+            <div class="status">LIVE DEMO</div>
+            <h3>/API-<span class="underline">WEATHER</span></h3>
+            <img src="img/aws-ec2.png" alt="Amazon EC2" style="min-width:32px;" class="icon">
+            <p>Live Lambda API showing Internet access from API running on a private subnet</p>
+            <button onclick="location.href='weather/'">Try It</button>
+        </div>
+
+        <div class="card">
+            <div class="status">LIVE DEMO</div>
+            <h3>/API-<span class="underline">NOTIFY</span></h3>
+            <img src="img/aws-sns.png" alt="Amazon SNS" style="min-width:32px;" class="icon">
+            <p>Live Lambda API working with SNS</p>
+            <button onclick="location.href='notify/'">Try It</button>
+        </div>
+
+        <div class="card">
+            <div class="status">LIVE DEMO</div>
+            <h3>/API-<span class="underline">LOGS</span></h3>
+            <img src="img/aws-cloudwatch.png" alt="Amazon SNS" style="min-width:32px;" class="icon">
+            <p>Live Lambda API working with Cloudwatch, the logs for this site</p>
+            <button onclick="location.href='cloudwatch/'">View Logs</button>
+        </div>
+
+    </div>
+    
+    <footer style="text-align:center; margin-top:40px; color:#333; font-family:monospace;">
+        <img src="img/AllanLinkedIn.jpeg" alt="Allan Savage"
+            style="width:120px; height:120px; border-radius:50%; border:2px solid #333; margin-bottom:10px;">
+        <br><br>
+        <div><strong style="color:#333;size:20px;">Allan Savage</strong></div>
+        <br>
+        <a href="https://www.linkedin.com/in/allan-savage-aws-dev" target="_blank" style="color:#333;">
+            https://www.linkedin.com/in/allan-savage-aws-dev
+        </a>
+    </footer>
+
+    <br>
+    <p style="font-size: 12px; color:#777; margin-top:20px; text-align:center;">
+        Built, Maintained & Deployed by Allan Savage • Terraform • Secure Serverless Architecture
+    </p>
+    <br><br>
+
+</body>
+
+</html>

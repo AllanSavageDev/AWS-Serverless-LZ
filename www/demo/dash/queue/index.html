@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" type="image/png" href="../img/terraform-icon.png">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>API-QUEUE Demo</title>
+    <link rel="stylesheet" href="../css/style.css" />
+</head>
+
+<script src="../js/log.js"></script>
+
+<body>
+    <h2 style="margin-bottom: 8px;">API-QUEUE Demo</h2>
+    <br>
+    <br>
+    <div class="tabs">
+        <input type="radio" id="tab1" name="tab-control" checked>
+        <label for="tab1">About</label>
+        <input type="radio" id="tab2" name="tab-control">
+        <label for="tab2">Run Test</label>
+        <input type="radio" id="tab3" name="tab-control">
+        <label for="tab3">Terraform File</label>
+        <input type="radio" id="tab4" name="tab-control">
+        <label for="tab4">Python File</label>
+
+        <input type="radio" id="tab5" name="tab-control">
+        <label for="tab5" onclick="history.back()">Home</label>
+
+        <div id="content1" class="tab-content">
+            <br>
+            <div
+                style="font-family: monospace; font-size: 14px; line-height: 1.4em; margin-bottom: 16px; padding:0px 10px 0px 10px">
+                <h3>Demonstrates a secure Lambda → SQS connection inside a private subnet.</h3>
+            </div>
+            <div
+                style="font-family: monospace; font-size: 14px; line-height: 1.4em; margin-bottom: 16px; padding:0px 10px 0px 10px">
+                Browser → API Gateway → Lambda (VPC) → SQS
+            </div>
+            <hr style="margin:8px 0;">
+
+            <div
+                style="font-family: monospace; font-size: 14px; line-height: 1.4em; margin-bottom: 16px; padding:0px 10px 0px 10px">
+                <br>
+                <b>A simple CRUD REST API with running test, Terraform and Python file</b>
+                <br>
+
+                <p>
+                    - The 'Run Test' tab will execute the API on AWS and return live output.<br>
+                    - The 'Terraform' tab shows the main.tf which declaring this API<br>
+                    - The 'Python' tab shows the lambda_hanlder.py and demonstrates how this is built<br>
+                </p>
+            </div>
+
+            <br>
+
+            <section class="api-info">
+                <h3>About This API</h3>
+                <p><strong>Endpoint Base URL:</strong> https://api.aws-serverless.net/api-queue</p>
+                <p><strong>Purpose:</strong> Demonstrates message queue operations using AWS Lambda, API Gateway, and
+                    SQS.</p>
+
+                <ul>
+                    <li><strong>POST</strong> – <code>/api-queue</code><br />
+                        Sends a message to the queue.<br />
+                        <em>Request Body:</em>
+                        <pre>
+{
+  "message": "Hello from Lambda SQS demo"
+}</pre>
+                        <em>Returns:</em> <code>{"messageId":"..."}</code>
+                    </li>
+
+                    <li><strong>GET</strong> – <code>/api-queue</code><br />
+                        Receives one message from the queue.<br />
+                        <em>Returns:</em> array of message objects (each with <code>MessageId</code>,
+                        <code>ReceiptHandle</code>, <code>Body</code>).
+                    </li>
+
+                    <li><strong>PUT</strong> – <code>/api-queue</code><br />
+                        Updates message visibility timeout.<br />
+                        <em>Request Body:</em>
+                        <pre>
+{
+  "receiptHandle": "string",
+  "visibilityTimeout": 10
+}</pre>
+                        <em>Returns:</em> <code>{"updated":true}</code>
+                    </li>
+
+                    <li><strong>DELETE</strong> – <code>/api-queue</code><br />
+                        Deletes a message by receipt handle.<br />
+                        <em>Request Body:</em>
+                        <pre>
+{
+  "receiptHandle": "string"
+}</pre>
+                        <em>Returns:</em> <code>{"deleted":true}</code>
+                    </li>
+                </ul>
+            </section>
+
+        </div>
+
+        <div id="content2" class="tab-content">
+            <br>
+
+            <div
+                style="font-family: monospace; font-size: 14px; line-height: 1.4em; margin-bottom: 16px; padding:0px 10px 0px 10px">
+                <h3>Test /api-queue Live</h3>
+            </div>
+
+            <div
+                style="font-family: monospace; font-size: 14px; line-height: 1.4em; margin-bottom: 16px; padding:0px 10px 0px 10px">
+                Browser → API Gateway → Lambda (VPC) → SQS
+            </div>
+
+            <hr style="margin:8px 0;">
+
+            <div
+                style="font-family: monospace; font-size: 14px; line-height: 1.4em; margin-bottom: 16px; padding:0px 10px 0px 10px">
+                <br>
+                <b>What This Demonstrates</b>
+                <br>
+                <p>
+                    - Secure Lambda-to-SQS connection inside a private subnet<br>
+                    - Credentials managed via AWS Secrets Manager<br>
+                    - Exposed only through API Gateway (no public DB access)<br>
+                    - Deployed and maintained via Terraform
+                </p>
+            </div>
+
+            <br>
+            <button id="runTest">Run Full Test</button>
+            <br><br>
+
+            <div id="log">Test output shown here ...</div>
+        </div>
+
+
+        <div id="content3" class="tab-content">
+            <br>
+            <div
+                style="font-family: monospace; font-size: 14px; line-height: 1.4em; margin-bottom: 16px; padding:0px 10px 0px 10px">
+                <h3>Terraform Module declares only things specific to this API.</h3>
+            </div>
+
+            <hr style="margin:8px 0;">
+
+            <div
+                style="font-family: monospace; font-size: 14px; line-height: 1.4em; margin-bottom: 16px; padding:0px 10px 0px 10px">
+                <p>
+                    The Module structure allows seperation of independent functionality.
+                </p>
+                <p>
+                    In this case we're using a Module to encapsulate the functionality of all resources sepcific to
+                    invoking a Lambda functon via an API Gateway.
+                </p>
+            </div>
+
+            <br>
+
+            <div class="code-block">
+                <script src="https://gist.github.com/AllanSavageDev/41688a75215f7a8b8f8d9c6401441d74.js"></script>
+            </div>
+            <style>
+                .code-block {
+                    margin-top: 1em;
+                    overflow-x: auto;
+                }
+            </style>
+        </div>
+
+        <div id="content4" class="tab-content">
+            <br>
+            <div
+                style="font-family: monospace; font-size: 14px; line-height: 1.4em; margin-bottom: 16px; padding:0px 10px 0px 10px">
+                <h3>Python based Lambda handler.</h3>
+            </div>
+
+            <hr style="margin:8px 0;">
+
+            <div
+                style="font-family: monospace; font-size: 14px; line-height: 1.4em; margin-bottom: 16px; padding:0px 10px 0px 10px">
+                <p>
+                    Every lambda is backed by a lambda_handler.py that is the entry point of the function.
+                </p>
+                <p>
+                    In this example we're using a standard design pattern to execute CRUD operations on a SQS based
+                    queue.
+                </p>
+            </div>
+
+            <br>
+
+            <div class="code-block">
+                <script src="https://gist.github.com/AllanSavageDev/0062bcf448562a19d7477f1fc35018f3.js"></script>
+            </div>
+            <style>
+                .code-block {
+                    margin-top: 1em;
+                    overflow-x: auto;
+                }
+            </style>
+        </div>
+
+    </div>
+    </div>
+
+    <br>
+
+    <footer style="text-align:center; margin-top:40px; color:#333; font-family:monospace;">
+        <img src="../img/AllanLinkedIn.jpeg" alt="Allan Savage"
+            style="width:120px; height:120px; border-radius:50%; border:2px solid #333; margin-bottom:10px;">
+        <br><br>
+        <div><strong style="color:#333;size:20px;">Allan Savage</strong></div>
+        <br>
+        <a href="https://www.linkedin.com/in/allan-savage-aws-dev" target="_blank" style="color:#333;">
+            https://www.linkedin.com/in/allan-savage-aws-dev
+        </a>
+    </footer>
+
+    <br>
+
+    <p style="font-size: 12px; color:#777; margin-top:20px; text-align:center;">Built, Maintained & Deployed by Allan
+        Savage • Terraform • Secure Serverless Architecture</p>
+
+    <br><br>
+    <script src="./logic.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" type="image/png" href="../img/terraform-icon.png">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>API-WEATHER Demo</title>
+    <link rel="stylesheet" href="../css/style.css" />
+</head>
+
+<script src="../js/log.js"></script>
+
+<body>
+    <h2 style="margin-bottom: 8px;">API-WEATHER Demo</h2>
+    <br>
+    <br>
+    <div class="tabs">
+        <input type="radio" id="tab1" name="tab-control" checked>
+        <label for="tab1">About</label>
+        <input type="radio" id="tab2" name="tab-control">
+        <label for="tab2">Run Test</label>
+        <input type="radio" id="tab3" name="tab-control">
+        <label for="tab3">Terraform File</label>
+        <input type="radio" id="tab4" name="tab-control">
+        <label for="tab4">Python File</label>
+
+        <input type="radio" id="tab5" name="tab-control">
+        <label for="tab5" onclick="history.back()">Home</label>
+
+        <div id="content1" class="tab-content">
+            <br>
+            <div
+                style="font-family: monospace; font-size: 14px; line-height: 1.4em; margin-bottom: 16px; padding:0px 10px 0px 10px">
+                <h3>Demonstrates a secure Lambda → Outside Internet connection via NAT GW from private subnet.</h3>
+            </div>
+            <div
+                style="font-family: monospace; font-size: 14px; line-height: 1.4em; margin-bottom: 16px; padding:0px 10px 0px 10px">
+                Browser → API Gateway → Lambda (VPC) → NAT GW → Public Internet
+            </div>
+            <hr style="margin:8px 0;">
+
+            <div
+                style="font-family: monospace; font-size: 14px; line-height: 1.4em; margin-bottom: 16px; padding:0px 10px 0px 10px">
+                <br>
+                <b>A simple CRUD REST API with running test, Terraform and Python file</b>
+                <br>
+
+                <p>
+                    - The 'Run Test' tab will execute the API on AWS and return live output.<br>
+                    - The 'Terraform' tab shows the main.tf which declaring this API<br>
+                    - The 'Python' tab shows the lambda_hanlder.py and demonstrates how this is built<br>
+                </p>
+            </div>
+
+            <br>
+
+            <section class="api-info">
+                <h3>About This API</h3>
+                <p><strong>Endpoint Base URL:</strong> https://api.aws-serverless.net/api-weather</p>
+                <p><strong>Purpose:</strong> Retrieves current weather information for a given city using Open-Meteo
+                    APIs via AWS Lambda and API Gateway.</p>
+
+                <ul>
+                    <li><strong>GET</strong> – <code>/api-weather</code><br />
+                        Fetches current weather data for the specified city.<br />
+                        <em>Query Parameter:</em> <code>?city=London</code><br />
+                        <em>Returns:</em> JSON object with temperature, windspeed, weather code, and time.<br />
+                        <em>Example Response:</em>
+                        <pre>
+{
+  "city": "London",
+  "temperature_C": 15.2,
+  "windspeed_m_s": 3.8,
+  "weather_code": 1,
+  "time": "2025-10-27T21:00"
+}</pre>
+                    </li>
+                </ul>
+            </section>
+
+
+        </div>
+
+        <div id="content2" class="tab-content">
+            <br>
+
+            <div
+                style="font-family: monospace; font-size: 14px; line-height: 1.4em; margin-bottom: 16px; padding:0px 10px 0px 10px">
+                <h3>Test /api-weather Live</h3>
+            </div>
+
+            <div
+                style="font-family: monospace; font-size: 14px; line-height: 1.4em; margin-bottom: 16px; padding:0px 10px 0px 10px">
+                Browser → API Gateway → Lambda (VPC) → NAT GW → Public Internet
+            </div>
+
+            <hr style="margin:8px 0;">
+
+            <div
+                style="font-family: monospace; font-size: 14px; line-height: 1.4em; margin-bottom: 16px; padding:0px 10px 0px 10px">
+                <br>
+                <b>What This Demonstrates</b>
+                <br>
+                <p>
+                    - Lambda-to-Internet outside connectivity from a private subnet
+                <p>
+                    - Uses NAT GW to achieve outside access per standard design pattern<br>
+                    - Exposed only through API Gateway (no public DB access)<br>
+                    - Deployed and maintained via Terraform
+                </p>
+            </div>
+
+            <br>
+            <button id="runTest">Run Full Test</button>
+            <br><br>
+
+            <div id="log">Test output shown here ...</div>
+        </div>
+
+
+        <div id="content3" class="tab-content">
+            <br>
+            <div
+                style="font-family: monospace; font-size: 14px; line-height: 1.4em; margin-bottom: 16px; padding:0px 10px 0px 10px">
+                <h3>Terraform Module declares only things specific to this API.</h3>
+            </div>
+
+            <hr style="margin:8px 0;">
+
+            <div
+                style="font-family: monospace; font-size: 14px; line-height: 1.4em; margin-bottom: 16px; padding:0px 10px 0px 10px">
+                <p>
+                    The Module structure allows seperation of independent functionality.
+                </p>
+                <p>
+                    In this case we're using a Module to encapsulate the functionality of all resources sepcific to
+                    invoking a Lambda functon via an API Gateway.
+                </p>
+            </div>
+
+            <br>
+
+            <div class="code-block">
+                <script src="https://gist.github.com/AllanSavageDev/6a3b80e379e1a85578a78fffa572cd20.js"></script>
+            </div>
+            <style>
+                .code-block {
+                    margin-top: 1em;
+                    overflow-x: auto;
+                }
+            </style>
+        </div>
+
+        <div id="content4" class="tab-content">
+            <br>
+            <div
+                style="font-family: monospace; font-size: 14px; line-height: 1.4em; margin-bottom: 16px; padding:0px 10px 0px 10px">
+                <h3>Python based Lambda handler.</h3>
+            </div>
+
+            <hr style="margin:8px 0;">
+
+            <div
+                style="font-family: monospace; font-size: 14px; line-height: 1.4em; margin-bottom: 16px; padding:0px 10px 0px 10px">
+                <p>
+                    Every lambda is backed by a lambda_handler.py that is the entry point of the function.
+                </p>
+                <p>
+                    In this example we're using a standard design pattern to execute CRUD operations on a DynamoDB
+                    table.
+                </p>
+            </div>
+
+            <br>
+            <div class="code-block">
+                <script src="https://gist.github.com/AllanSavageDev/57b69bd4566cd13c24b6bfb89a03d537.js"></script>
+            </div>
+            <style>
+                .code-block {
+                    margin-top: 1em;
+                    overflow-x: auto;
+                }
+            </style>
+        </div>
+    </div>
+    </div>
+
+    <br>
+
+    <footer style="text-align:center; margin-top:40px; color:#333; font-family:monospace;">
+        <img src="../img/AllanLinkedIn.jpeg" alt="Allan Savage"
+            style="width:120px; height:120px; border-radius:50%; border:2px solid #333; margin-bottom:10px;">
+        <br><br>
+        <div><strong style="color:#333;size:20px;">Allan Savage</strong></div>
+        <br>
+        <a href="https://www.linkedin.com/in/allan-savage-aws-dev" target="_blank" style="color:#333;">
+            https://www.linkedin.com/in/allan-savage-aws-dev
+        </a>
+    </footer>
+
+    <br>
+
+    <p style="font-size: 12px; color:#777; margin-top:20px; text-align:center;">Built, Maintained & Deployed by Allan
+        Savage • Terraform • Secure Serverless Architecture</p>
+
+    <br><br>
+    <script src="./logic.js"></script>
+
+</body>
+
+</html>

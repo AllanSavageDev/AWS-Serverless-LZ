@@ -1,0 +1,265 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:CreateBucket",
+                "s3:DeleteBucket",
+                "s3:ListBucket",
+                "s3:GetBucketLocation",
+                "s3:PutBucketVersioning",
+                "s3:GetBucketVersioning",
+                "s3:PutBucketEncryption",
+                "s3:PutBucketPublicAccessBlock",
+                "s3:GetEncryptionConfiguration",
+                "s3:PutEncryptionConfiguration",
+                "s3:GetBucketPolicy",
+                "s3:PutBucketPolicy",
+                "s3:GetBucketAcl",
+                "s3:GetBucketCORS",
+                "s3:GetBucketWebsite",
+                "s3:GetAccelerateConfiguration",
+                "s3:GetAnalyticsConfiguration",
+                "s3:GetBucketLogging",
+                "s3:GetBucketNotification",
+                "s3:GetBucketObjectLockConfiguration",
+                "s3:GetBucketOwnershipControls",
+                "s3:GetBucketPolicyStatus",
+                "s3:GetBucketPublicAccessBlock",
+                "s3:GetBucketReplication",
+                "s3:GetBucketRequestPayment",
+                "s3:GetBucketTagging",
+                "s3:GetIntelligentTieringConfiguration",
+                "s3:GetInventoryConfiguration",
+                "s3:GetLifecycleConfiguration",
+                "s3:GetMetricsConfiguration",
+                "s3:GetReplicationConfiguration"
+            ],
+            "Resource": "arn:aws:s3:::fork-id-*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:PutObject",
+                "s3:GetObject",
+                "s3:DeleteObject",
+                "s3:GetObjectTagging"
+            ],
+            "Resource": "arn:aws:s3:::fork-id-*/*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "dynamodb:CreateTable",
+                "dynamodb:DeleteTable",
+                "dynamodb:DescribeTable",
+                "dynamodb:UpdateTable",
+                "dynamodb:ListTagsOfResource",
+                "dynamodb:TagResource",
+                "dynamodb:PutItem",
+                "dynamodb:GetItem",
+                "dynamodb:DeleteItem",
+                "dynamodb:UpdateItem"
+            ],
+            "Resource": "arn:aws:dynamodb:*:*:table/fork-id-*-terraform-state-lock-table"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:DescribeLogGroups",
+                "logs:DescribeLogStreams",
+                "logs:PutLogEvents"
+            ],
+            "Resource": "arn:aws:logs:*:*:log-group:/aws/lambda/fork-id-*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "lambda:CreateFunction",
+                "lambda:DeleteFunction",
+                "lambda:UpdateFunctionCode",
+                "lambda:UpdateFunctionConfiguration",
+
+                "lambda:GetFunction",
+                "lambda:GetFunctionConfiguration",
+                "lambda:GetAlias",
+                "lambda:GetPolicy",
+
+                "lambda:ListFunctions",
+                "lambda:ListVersionsByFunction",
+                "lambda:ListAliases",
+                "lambda:ListTags",
+
+                "lambda:PublishVersion",
+                "lambda:TagResource",
+                "lambda:UntagResource",
+
+                "lambda:GetFunctionCodeSigningConfig",
+
+                "lambda:AddPermission",
+                "lambda:RemovePermission",
+                "lambda:InvokeFunction",
+                "lambda:InvokeAsync",
+                "lambda:GetEventSourceMapping",
+                "lambda:ListEventSourceMappings",
+                "lambda:CreateEventSourceMapping",
+                "lambda:UpdateEventSourceMapping",
+                "lambda:DeleteEventSourceMapping"
+
+
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "iam:CreateRole",
+                "iam:DeleteRole",
+                "iam:UpdateRole",
+                "iam:PassRole",
+
+                "iam:PutRolePolicy",
+                "iam:DeleteRolePolicy",
+
+                "iam:AttachRolePolicy",
+                "iam:DetachRolePolicy",
+
+                "iam:GetRole",
+                "iam:ListRolePolicies",
+                "iam:ListAttachedRolePolicies",
+                "iam:ListInstanceProfilesForRole",
+                "iam:ListRoleTags",
+
+                "iam:GetInstanceProfile",
+                "iam:CreateInstanceProfile",
+                "iam:AddRoleToInstanceProfile",
+                "iam:RemoveRoleFromInstanceProfile",
+                "iam:DeleteInstanceProfile"
+            ],
+            "Resource": "arn:aws:iam::*:role/fork-id-*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "secretsmanager:CreateSecret",
+                "secretsmanager:UpdateSecret",
+                "secretsmanager:GetSecretValue",
+                "secretsmanager:PutSecretValue",
+                "secretsmanager:TagResource",
+                "secretsmanager:DeleteSecret"
+            ],
+            "Resource": "arn:aws:secretsmanager:*:*:secret:fork-id-*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "sqs:CreateQueue",
+                "sqs:DeleteQueue",
+                "sqs:GetQueueAttributes",
+                "sqs:SetQueueAttributes",
+                "sqs:SendMessage",
+                "sqs:ReceiveMessage",
+                "sqs:DeleteMessage"
+            ],
+            "Resource": "arn:aws:sqs:*:*:fork-id-*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "sns:CreateTopic",
+                "sns:DeleteTopic",
+                "sns:Subscribe",
+                "sns:Unsubscribe",
+                "sns:Publish"
+            ],
+            "Resource": "arn:aws:sns:*:*:fork-id-*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "apigateway:POST",
+                "apigateway:PUT",
+                "apigateway:PATCH",
+                "apigateway:GET",
+                "apigateway:DELETE"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "cloudfront:CreateDistribution",
+                "cloudfront:CreateDistributionWithTags",
+                "cloudfront:UpdateDistribution",
+                "cloudfront:GetDistribution",
+                "cloudfront:GetDistributionConfig",
+                "cloudfront:TagResource",
+                "cloudfront:UntagResource",
+                "cloudfront:DeleteDistribution",
+                "cloudfront:ListTagsForResource"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "cloudfront:CreateFunction",
+                "cloudfront:UpdateFunction",
+                "cloudfront:PublishFunction",
+                "cloudfront:GetFunction",
+                "cloudfront:DescribeFunction",
+                "cloudfront:DeleteFunction"
+            ],
+            "Resource": "arn:aws:cloudfront::*:function/fork-id-*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "cloudfront:CreateOriginAccessControl",
+                "cloudfront:GetOriginAccessControl",
+                "cloudfront:UpdateOriginAccessControl",
+                "cloudfront:DeleteOriginAccessControl"
+            ],
+            "Resource": "arn:aws:cloudfront::*:origin-access-control/*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListBucket",
+                "s3:GetObject",
+                "s3:DeleteObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::fork-id-*-uploads",
+                "arn:aws:s3:::fork-id-*-uploads/*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:PutObject",
+                "s3:AbortMultipartUpload"
+            ],
+            "Resource": "arn:aws:s3:::fork-id-*-uploads/*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListBucket"
+            ],
+            "Resource": "arn:aws:s3:::fork-id-*-uploads"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "iam:ListRolePolicies",
+                "iam:GetRolePolicy",
+                "iam:PutRolePolicy"
+            ],
+            "Resource": "arn:aws:iam::*:role/t5-test-bastion-role"
+        }
+    ]
+}

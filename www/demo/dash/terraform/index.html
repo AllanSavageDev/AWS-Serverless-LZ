@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" type="image/png" href="../img/terraform-icon.png">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Terraform Deployment</title>
+    <link rel="stylesheet" href="../css/style.css" />
+</head>
+
+<script src="../js/log.js"></script>
+
+<body>
+
+    <h2 style="margin-bottom: 8px;">Breakdown and Overall Landscape</h2>
+    <br>
+    <br>
+    <div class="tabs">
+        <input type="radio" id="tab1" name="tab-control" checked>
+        <label for="tab1">About</label>
+        <input type="radio" id="tab2" name="tab-control">
+        <label for="tab2">VPC Overview</label>
+        <input type="radio" id="tab3" name="tab-control">
+        <label for="tab3">Terraform File</label>
+
+        <input type="radio" id="tab4" name="tab-control">
+        <label for="tab4" onclick="history.back()">Home</label>
+
+
+        <div id="content1" class="tab-content">
+            <br>
+
+            <div
+                style="font-family: monospace; font-size: 14px; line-height: 1.4em; margin-bottom: 16px; padding:0px 10px 0px 10px">
+                <h3>A real AWS environment, built and maintained via IaC</h3>
+            </div>
+
+            <hr style="margin:8px 0;">
+
+            <div
+                style="font-family: monospace; font-size: 14px; line-height: 1.4em; margin-bottom: 16px; padding:0px 10px 0px 10px">
+                <br>
+                <b>What am I looking at here?</b>
+                <br>
+
+                <p>
+                    This environment demonstrates one practical philosophy for defining a complete Lambda-based
+                    serverless deployment using Terraform.
+                </p>
+
+                <p>
+                    It’s easy to deploy a Docker container onto an EC2 instance in a public subnet and call it a “cloud
+                    app.” For personal projects, that’s often exactly the right move.
+                    In real production environments, though, compliance and security requirements multiply quickly.
+                    Least-privilege IAM, network segmentation, blast-radius control, NACLs, security groups, encryption,
+                    auditability — these add up fast.
+                </p>
+
+                <p>
+                    When you open a fresh AWS account, you get a Default VPC. Everything is public. Everything has a
+                    public IP. And accessing services like S3 over the public internet works fine for hobby workloads
+                    with no security expectations.
+                </p>
+
+                <p>
+                    That’s also where most people stop.
+                </p>
+
+                <p>
+                    The moment you have to meet real requirements — restricted access, private networking, secure
+                    service-to-service communication, IAM boundaries, regulated data — the entire approach has to
+                    change.
+                    This demo shows what that shift looks like when real architecture, security discipline, and
+                    Terraform-driven automation come together.
+                </p>
+
+            </div>
+
+            <div
+                style="font-family: monospace; font-size: 14px; line-height: 1.4em; margin-bottom: 16px; padding:0px 10px 0px 10px">
+                <br>
+                <b>So <i>THIS</i> is the right way to do it?</b>
+                <br>
+
+                <p>
+                    Hard engineering often turns into philosophy the moment it collides with real-world constraints.
+                    Designing “the ideal AWS landing zone” is one of those moments.
+                </p>
+
+                <p>
+                    This site isn’t a recommendation — it’s an exploration.
+                </p>
+
+                <p>
+                    If you’ve ever wondered how to deploy a family of Lambda functions behind API Gateway, each
+                    supporting different APIs, while securely accessing both private VPC resources and managed AWS
+                    services over VPC Endpoints… let me save you the trouble.
+                </p>
+                <p>
+                    I built it. And this is what it ends up looking like.
+                </p>
+
+                <p>
+                    I used to wonder what would happen if I glued several projects together, removed every server I had
+                    to maintain, and routed everything through Lambda and API Gateway.
+                    Now I know.
+                </p>
+            </div>
+
+
+            <div
+                style="font-family: monospace; font-size: 14px; line-height: 1.4em; margin-bottom: 16px; padding:0px 10px 0px 10px">
+                <br>
+                <b>Don't take any of this too seriously</b>
+                <br>
+
+                <p>
+                    No code reviews happened here. No formal scrutiny. It’s not award-winning code — but it runs, and
+                    for the purpose of this demo, that’s enough.
+                </p>
+
+                <p>
+                    This is a quick, incomplete demonstration of one way to approach serverless development inside a
+                    real VPC.
+                    It wasn’t built to solve a production problem.
+                    It was built so I could encounter the problems, work through them, and grow by doing the work
+                    end-to-end.
+                </p>
+
+            </div>
+        </div>
+
+        <div id="content2" class="tab-content">
+            <br>
+
+            <div
+                style="font-family: monospace; font-size: 14px; line-height: 1.4em; margin-bottom: 16px; padding:0px 10px 0px 10px">
+                <h3>A Terraform-built VPC that reflects standard AWS production design.</h3>
+            </div>
+
+            <hr style="margin:8px 0;">
+
+            <div
+                style="font-family: monospace; font-size: 14px; line-height: 1.4em; margin-bottom: 16px; padding:0px 10px 0px 10px">
+                <br>
+                <b>Core Infrastructure (VPC Layer)</b>
+                <br>
+                <p>
+                    - VPC: 10.0.0.0/16<br>
+                    - Public Subnets: 10.0.1.0/24, 10.0.2.0/24<br>
+                    - Private Subnets: 10.0.10.0/24, 10.0.11.0/24<br>
+                    - Route Tables + Associations<br>
+                    - NAT Gateway + Internet Gateway<br>
+                    - VPC Endpoints (S3, Secrets Manager, SNS, SQS, DynamoDB)<br>
+                </p>
+            </div>
+
+            <div
+                style="font-family: monospace; font-size: 14px; line-height: 1.4em; margin-bottom: 16px; padding:0px 10px 0px 10px">
+                <br>
+                <b>Security & Access Control</b>
+                <br>
+                <p>
+                    - Security Groups (per resource & per VPC endpoint)<br>
+                    - NACLs (default, implicit rules)<br>
+                    - IAM Roles & Policies (Lambda, RDS, GitHub OIDC)<br>
+                    - KMS Keys (default + service-linked)<br>
+                </p>
+            </div>
+
+            <div
+                style="font-family: monospace; font-size: 14px; line-height: 1.4em; margin-bottom: 16px; padding:0px 10px 0px 10px">
+                <br>
+                <b>Compute & Data</b>
+                <br>
+                <p>
+                    - Lambda Functions: api-health, api-rds, api-notify<br>
+                    - RDS PostgreSQL (private subnet)<br>
+                    - DynamoDB (sessions / demo data)<br>
+                    - EC2 Bastion server (Postgres outside access)<br>
+                    - EventBridge Rules (schedulers / triggers)<br>
+                </p>
+            </div>
+
+            <div
+                style="font-family: monospace; font-size: 14px; line-height: 1.4em; margin-bottom: 16px; padding:0px 10px 0px 10px">
+                <br>
+                <b>Networking & Delivery</b>
+                <br>
+                <p>
+                    - API Gateway (HTTP API, routes, integrations)<br>
+                    - CloudFront Distribution (global CDN)<br>
+                    - S3 Bucket (static web + CloudFront origin)<br>
+                    - Route 53 Hosted Zone + DNS Records<br>
+                    - ACM Certificates (TLS for domains)<br>
+                </p>
+            </div>
+
+            <div
+                style="font-family: monospace; font-size: 14px; line-height: 1.4em; margin-bottom: 16px; padding:0px 10px 0px 10px">
+                <br>
+                <b>CI/CD & Automation</b>
+                <br>
+                <p>
+                    - GitHub Actions (OIDC → Terraform Apply)<br>
+                    - Terraform Backend (state in S3, locking via DynamoDB)<br>
+                    - Environment Secrets (AWS Secrets Manager)<br>
+                    - Modularized Terraform: sys-vpc, api-*, sys-www<br>
+                </p>
+            </div>
+
+            <div
+                style="font-family: monospace; font-size: 14px; line-height: 1.4em; margin-bottom: 16px; padding:0px 10px 0px 10px">
+                <br>
+                <b>Monitoring & Ops</b>
+                <br>
+                <p>
+                    - CloudWatch Logs (Lambda, API Gateway)<br>
+                    - CloudWatch Metrics & Alarms<br>
+                    - AWS Config / Trusted Advisor (optional)<br>
+                    - Tagging: t5-*, envs/dev<br>
+                </p>
+            </div>
+        </div>
+
+        <div id="content3" class="tab-content">
+            <br>
+            <div
+                style="font-family: monospace; font-size: 14px; line-height: 1.4em; margin-bottom: 16px; padding:0px 10px 0px 10px">
+                <h3>A modular, Terraform-built AWS environment; clarity, security, and reusability.</h3>
+            </div>
+
+            <hr style="margin:8px 0;">
+
+            <div
+                style="font-family: monospace; font-size: 14px; line-height: 1.4em; margin-bottom: 16px; padding:0px 10px 0px 10px">
+                <p>
+                    By defining AWS infrastructure as Terraform modules, each major service — networking, compute,
+                    database, and delivery — is packaged as an independent, reusable unit.
+                </p>
+                <p>
+                    This approach lets higher-level environments (like this site’s main module) orchestrate the entire
+                    stack declaratively, ensuring consistency, isolation, and maintainability across deployments.
+                </p>
+            </div>
+
+            <br>
+
+            <div class="code-block">
+                <script src="https://gist.github.com/AllanSavageDev/4a7dd9eb3001cb1baf4e9e5e75c02307.js"></script>
+            </div>
+            <style>
+                .code-block {
+                    margin-top: 1em;
+                    overflow-x: auto;
+                }
+            </style>
+        </div>
+
+    </div>
+    <br>
+
+    <footer style="text-align:center; margin-top:40px; color:#333; font-family:monospace;">
+        <img src="../img/AllanLinkedIn.jpeg" alt="Allan Savage"
+            style="width:120px; height:120px; border-radius:50%; border:2px solid #333; margin-bottom:10px;">
+        <br><br>
+        <div><strong style="color:#333;size:20px;">Allan Savage</strong></div>
+        <br>
+        <a href="https://www.linkedin.com/in/allan-savage-aws-dev" target="_blank" style="color:#333;">
+            https://www.linkedin.com/in/allan-savage-aws-dev
+        </a>
+    </footer>
+
+    <br>
+
+    <!-- Footer Summary -->
+    <p style="font-size: 12px; color:#777; margin-top:20px; text-align:center;">
+        Built, Maintained & Deployed by Allan Savage • Terraform • Secure Serverless Architecture
+    </p>
+
+    <br><br>
+
+</body>
+
+</html>
