@@ -23,6 +23,8 @@ It was built as a *portfolio demonstration* — not a production product — to 
 *A diagram showing the VPC, Lambda, API Gateway, CloudFront, and DNS flows.*
 
 ## Project Structure  
+
+```text
 .
 ├── envs/
 │ └── dev/ # environment configuration
@@ -53,7 +55,7 @@ It was built as a *portfolio demonstration* — not a production product — to 
 │ └── demo/
 ├── .gitignore
 ├── README.md
-
+```
 
 ## Explore It Yourself  
 1. Clone the repo: `git clone git@github.com:AllanSavageDev/AWS-Serverless-LZ.git`  
