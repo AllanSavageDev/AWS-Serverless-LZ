@@ -2,7 +2,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 ## Live Demo  
-Visit: https://www.aws-serverless.net
+Visit: https://www.aws-serverless.net/demo/dash
 
 ## What is this?  
 This repository contains a **live, fully-deployed AWS serverless environment**, built with Terraform and running real APIs, a static front-end, multiple domains, and global content delivery via CloudFront.  
@@ -102,7 +102,7 @@ flowchart TD
 ## About Me  
 **Allan Savage** — Cloud & DevOps Engineer specializing in AWS, Terraform, Serverless architecture.  
 GitHub: [@AllanSavageDev](https://github.com/AllanSavageDev)  
-LinkedIn: [linkedin.com/in/allansavage](https://linkedin.com/in/allansavage)  
+LinkedIn: [www.linkedin.com/in/allan-savage-aws-dev](https://www.linkedin.com/in/allan-savage-aws-dev)  
 
 ## License  
 This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
