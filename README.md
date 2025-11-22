@@ -6,7 +6,10 @@ Visit: https://aws-serverless.net
 
 ## What is this?  
 This repository contains a **live, fully-deployed AWS serverless environment**, built with Terraform and running real APIs, a static front-end, multiple domains, and global content delivery via CloudFront.  
+
 It was built as a *portfolio demonstration* — not a production product — to show my ability to design, deploy, and operate cloud-native infrastructure end-to-end.
+
+
 
 ## Key Highlights  
 - **Infrastructure as Code**: Entire stack managed via Terraform — VPC, subnets, NAT/IGW, private routing, security groups, IAM roles, KMS, Secrets Manager.  
@@ -21,47 +24,35 @@ It was built as a *portfolio demonstration* — not a production product — to 
 
 ## Project Structure  
 .
-├── .git
-│   ├── COMMIT_EDITMSG
-│   ├── config
-│   ├── description
-│   ├── HEAD
-│   ├── hooks
-│   ├── index
-│   ├── info
-│   ├── logs
-│   ├── objects
-│   └── refs
+├── envs/
+│ └── dev/ # environment configuration
+├── modules/ # Terraform modules
+│ ├── api-log/
+│ ├── api-notify/
+│ ├── api-queue/
+│ ├── api-rds/
+│ ├── api-todo/
+│ ├── api-weather/
+│ ├── sys-bastion/
+│ ├── sys-dynamodb/
+│ ├── sys-lambda/
+│ ├── sys-rds/
+│ ├── sys-route53/
+│ ├── sys-security/
+│ ├── sys-vpc/
+│ ├── sys-vpce/
+│ └── sys-www/
+├── scripts/
+│ ├── api-log/
+│ ├── api-notify/
+│ ├── api-queue/
+│ ├── api-rds/
+│ ├── api-todo/
+│ └── api-weather/
+├── www/
+│ └── demo/
 ├── .gitignore
-├── envs
-│   └── dev
-├── modules
-│   ├── api-log
-│   ├── api-notify
-│   ├── api-queue
-│   ├── api-rds
-│   ├── api-todo
-│   ├── api-weather
-│   ├── sys-bastion
-│   ├── sys-dynamodb
-│   ├── sys-lambda
-│   ├── sys-rds
-│   ├── sys-route53
-│   ├── sys-security
-│   ├── sys-vpc
-│   ├── sys-vpce
-│   └── sys-www
 ├── README.md
-├── scripts
-│   ├── api-log
-│   ├── api-notify
-│   ├── api-queue
-│   ├── api-rds
-│   ├── api-todo
-│   └── api-weather
-└── www
-    └── demo
-
 
 
 ## Explore It Yourself  
