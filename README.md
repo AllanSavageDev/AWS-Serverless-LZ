@@ -9,6 +9,19 @@ This repository contains a **live, fully-deployed AWS serverless environment**, 
 
 It was built as a *portfolio demonstration* — not a production product — to show my ability to design, deploy, and operate cloud-native infrastructure end-to-end.
 
+In truth, it’s a collection of smaller experiments and working prototypes, stitched together in pursuit of one big question:
+
+> *What would I actually encounter if I tried to build a production-style VPC with full resources — RDS, DynamoDB, S3, CloudFront — and run everything through Lambda as my web services layer?*
+
+It’s an ambitious thought experiment: no Kubernetes, no EC2, just an infinitely scalable, fully managed, event-driven system running API functions like clockwork. Build it once, let AWS scale it forever — and at an absurdly low operational cost.
+
+None of the code in this repository has been through a formal refactor. If I needed a variable halfway through an odd scope, I declared one and kept moving. The goal wasn’t elegance — it was functionality.
+
+Beyond getting it to run and establishing a working baseline for a Terraform-driven Landing Zone, no extra polish was applied. What you see here is a running system, and that’s the point — a solid foundation for anyone exploring AWS serverless design from the ground up.
+
+
+
+
 
 
 ## Key Highlights  
