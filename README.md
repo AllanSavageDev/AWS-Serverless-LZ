@@ -20,3 +20,62 @@ It was built as a *portfolio demonstration* — not a production product — to 
 *A diagram showing the VPC, Lambda, API Gateway, CloudFront, and DNS flows.*
 
 ## Project Structure  
+.
+├── .git
+│   ├── COMMIT_EDITMSG
+│   ├── config
+│   ├── description
+│   ├── HEAD
+│   ├── hooks
+│   ├── index
+│   ├── info
+│   ├── logs
+│   ├── objects
+│   └── refs
+├── .gitignore
+├── envs
+│   └── dev
+├── modules
+│   ├── api-log
+│   ├── api-notify
+│   ├── api-queue
+│   ├── api-rds
+│   ├── api-todo
+│   ├── api-weather
+│   ├── sys-bastion
+│   ├── sys-dynamodb
+│   ├── sys-lambda
+│   ├── sys-rds
+│   ├── sys-route53
+│   ├── sys-security
+│   ├── sys-vpc
+│   ├── sys-vpce
+│   └── sys-www
+├── README.md
+├── scripts
+│   ├── api-log
+│   ├── api-notify
+│   ├── api-queue
+│   ├── api-rds
+│   ├── api-todo
+│   └── api-weather
+└── www
+    └── demo
+
+
+
+## Explore It Yourself  
+1. Clone the repo: `git clone git@github.com:AllanSavageDev/AWS-Serverless-LZ.git`  
+2. Review the `/modules/` folder to see how each AWS service is defined  
+3. Browse the `www/demo/dash/` directory and open the site URL  
+4. Inspect the live AWS account (public endpoints) powered by this code  
+
+> **Note**: This code deploys real, live resources. Because this is a portfolio demo, some components include shortcuts and simplified modules. It is *not* intended as a production-grade, ready-to-run template. It’s designed to illustrate the full end-to-end workflow and cloud ecosystem.
+
+## About Me  
+**Allan Savage** — Cloud & DevOps Engineer specializing in AWS, Terraform, Serverless architecture.  
+GitHub: [@AllanSavageDev](https://github.com/AllanSavageDev)  
+LinkedIn: [linkedin.com/in/allansavage](https://linkedin.com/in/allansavage)  
+
+## License  
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
