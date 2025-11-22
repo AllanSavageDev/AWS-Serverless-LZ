@@ -42,6 +42,20 @@ The goal was to surface the friction points and understand how the “purely ser
 ![](docs/architecture-diagram.svg)  
 *A diagram showing the VPC, Lambda, API Gateway, CloudFront, and DNS flows.*
 
+
+```mermaid
+flowchart TD
+    user([User Request]) --> cf[CloudFront]
+    cf --> apigw[API Gateway]
+    apigw --> lambda[Lambda (Private Subnet)]
+    lambda --> rds[(RDS PostgreSQL)]
+    lambda --> dynamo[(DynamoDB)]
+    lambda --> s3[(S3 Bucket)]
+    cf --> s3
+    dns[Route 53] --> cf
+```
+
+
 ## Project Structure  
 
 ```text
