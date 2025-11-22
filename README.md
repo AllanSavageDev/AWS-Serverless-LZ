@@ -1,82 +1,22 @@
-# Terraform-AWS-Full-Landing-Zone
+# AWS Serverless Landing Zone  
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-### Overview
-This repository contains a complete, production-grade AWS Landing Zone built entirely with Terraform.  
-It demonstrates real-world patterns for secure, serverless infrastructure — the same design used by top-tier cloud consulting shops.
+## Live Demo  
+Visit: https://aws-serverless.net
 
----
+## What is this?  
+This repository contains a **live, fully-deployed AWS serverless environment**, built with Terraform and running real APIs, a static front-end, multiple domains, and global content delivery via CloudFront.  
+It was built as a *portfolio demonstration* — not a production product — to show my ability to design, deploy, and operate cloud-native infrastructure end-to-end.
 
-### 🧱 Core Stack
+## Key Highlights  
+- **Infrastructure as Code**: Entire stack managed via Terraform — VPC, subnets, NAT/IGW, private routing, security groups, IAM roles, KMS, Secrets Manager.  
+- **Serverless Backend**: AWS Lambda functions running in private subnets behind APIs, integrating with RDS PostgreSQL and DynamoDB.  
+- **Global Delivery**: S3-hosted static front-end routed through CloudFront, custom domains, HTTPS, cache invalidation.  
+- **Multi-Domain Configuration**: Two domains (`aws-serverless.net` and `lingua1.com`) wired into the same architecture.  
+- **CI/CD Ready**: GitHub Actions with OIDC based role assumption, Terraform CLI, packaging Lambdas, infrastructure deployment automation.
 
-| Layer | Components | Description |
-|-------|-------------|--------------|
-| **Network (VPC)** | Custom VPC, public + private subnets, route tables, NAT + IGW | Isolated network foundation for all workloads |
-| **Compute** | AWS Lambda (Python 3.11) | Serverless backend functions running inside private subnets |
-| **Data** | RDS PostgreSQL (private) + DynamoDB (public-edge use) | Relational and NoSQL data layers, both privately routed |
-| **Security** | IAM, KMS, Secrets Manager, dedicated SGs per endpoint | Principle of least privilege enforced at every layer |
-| **Edge** | API Gateway + CloudFront + S3 static hosting | Global CDN + REST API surface for web and API clients |
-| **Automation** | GitHub Actions + Terraform CLI | One-command deploy via OIDC-based CI/CD pipeline |
+## Architecture Overview  
+![](docs/architecture-diagram.svg)  
+*A diagram showing the VPC, Lambda, API Gateway, CloudFront, and DNS flows.*
 
----
-
-### 🚀 Highlights
-
-- **Private-only architecture:** All data and APIs live in private subnets, accessed through VPC endpoints.  
-- **Per-service security groups:** Each interface endpoint and Lambda function has its own SG for fine-grained control.  
-- **Secrets handled properly:** DB credentials stored in AWS Secrets Manager and fetched by Lambdas at runtime.  
-- **API Gateway routing:** Multiple Lambda integrations (`/api-now`, `/api-rds`, `/api-notify`) wired through HTTP API.  
-- **CloudFront static front-end:** Minimal HTML dashboard to exercise live APIs and visualize responses.  
-
----
-
-### 🧩 Structure
-
-envs/
-dev/
-main.tf # Core environment stack
-modules/
-sys-vpc/ # VPC + networking
-rds/ # PostgreSQL database
-lambda-api/ # Lambda + API Gateway integration
-bastion/ # SSH/Session Manager host
-scripts/
-api-rds/ # Lambda source (Python)
-api-notify/
-api-now/
-
-
----
-
-### ⚙️ Deploy
-
-```bash
-terraform init
-terraform plan
-terraform apply
-```
-
-
-Terraform builds the entire environment — network, endpoints, Lambdas, and database — from scratch.
-
-🧠 Tech Focus
-
-Terraform: Infrastructure-as-Code, module design, remote state best practices
-
-AWS: VPC, Lambda, API Gateway, RDS, DynamoDB, CloudFront, S3, Secrets Manager
-
-Python: Lightweight Lambda handlers (psycopg2/pg8000, boto3)
-
-CI/CD: GitHub Actions with OIDC authentication and Makefile-based Lambda packaging
-
-📚 Use This Repo To
-
-Study a full AWS Landing Zone reference written 100% in Terraform.
-
-See how private-only Lambda + RDS architectures are wired up cleanly.
-
-Fork and adapt for your own consulting or certification projects.
-
-Author: Allan Savage
-License: MIT
-
-
+## Project Structure  
